@@ -29,6 +29,9 @@ $insert_sql = "INSERT INTO users (first_name, last_name, email, facebook_url, tw
 mysqli_query($con, $insert_sql)
   or die(mysql_error());
 
+$get_user_query = "SELECT * FROM USERS WHERE..."
+mysqli_query($con, $get_user_query);
+
 ?>
 
 <html>
@@ -37,7 +40,7 @@ mysqli_query($con, $insert_sql)
   </head>
   <body>
     <div id="header"><h1>PHP & MySQL: The Missing Manual</h1></div>
-    <div id="example">Example 2-1</div>
+    <div id="example">Example 6-1</div>
     
     <div id="content">
       <p>Here's a record of what information you submitted:</p>
