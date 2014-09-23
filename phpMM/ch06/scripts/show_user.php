@@ -1,3 +1,30 @@
+<?php
+require '../../scripts/database_connection.php';
+
+$user_id = $_REQUEST['user_id'];
+
+$select_query = "SELECT * FROM users WHERE user_id = " . $user_id;
+
+$result = mysqli_query($con, $select_query);
+
+if ($result) {
+  $row = mysqli_fetch_array($result);
+  $first_name    = $row['first_name'];
+  $last_name     = $row['last_name'];
+  $bio           = $row['bio'];
+  $email         = $row['email'];
+  $facebook_url  = $row['facebook_url'];
+  $twitter_handle= $row['twitter_handle'];
+  
+  $twitter_url = "http://www.twitter.com/" .$twitter_handle;
+  
+  $user_image = "/not/yet/implemented.jpg";
+  
+} else {
+  die("Error locating user with ID {$user_id}");
+}
+
+?>
 
 <html>
   <head>
