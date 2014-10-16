@@ -11,8 +11,4 @@ if (mysqli_connect_errno()) {
  
 } 
 
-$dbname = constant('DATABASE_NAME');
-
-echo "<p>Connected to MySQL to Database: " .DATABASE_NAME ."</p>"; 
-
 ?>

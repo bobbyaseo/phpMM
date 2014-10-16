@@ -1,12 +1,11 @@
 <?php
 
-
-
-require '../../ch05/scripts/database_connection.php';
+require '../../scripts/database_connection.php';
 
 $first_name = trim($_REQUEST['first_name']);
 $last_name = trim($_REQUEST['last_name']);
 $email = trim($_REQUEST['email']);
+$bio = trim($_REQUEST['bio']);
 $facebook_url = str_replace("facebook.org", "facebook.com",
                             trim($_REQUEST['facebook_url']));
 $position = strpos($facebook_url, "facebook.com");
@@ -22,36 +21,16 @@ if ($position === false) {
   $twitter_url = $twitter_url . substr($twitter_handle, $position + 1);
 }
 
-$insert_sql = "INSERT INTO users (first_name, last_name, email, facebook_url, twitter_handle) " .
+$insert_sql = "INSERT INTO users (first_name, last_name, email, facebook_url, twitter_handle, bio) " .
   "VALUES ('{$first_name}', '{$last_name}', '{$email}', " .
-  "'{$facebook_url}', '{$twitter_handle}');";
+  "'{$facebook_url}', '{$twitter_handle}', '{$bio}');";
 
 mysqli_query($con, $insert_sql)
   or die(mysql_error());
 
-$get_user_query = "SELECT * FROM USERS WHERE..."
+$get_user_query = "SELECT * FROM USERS WHERE...";
 mysqli_query($con, $get_user_query);
 
+header("Location: show_user.php?user_id=" . mysqli_insert_id($con));
+exit();
 ?>
-
-<html>
-  <head>
-    <link href="../../css/phpMM.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <div id="header"><h1>PHP & MySQL: The Missing Manual</h1></div>
-    <div id="example">Example 6-1</div>
-    
-    <div id="content">
-      <p>Here's a record of what information you submitted:</p>
-      <p>
-        Name: <?php echo $first_name . " " . $last_name; ?><br />
-        E-Mail Address: <?php echo $email ?><br />
-        <a href="<?php echo $facebook_url; ?>">Your Facebook page</a><br />
-        <a href="<?php echo $twitter_url; ?>">Check you your Tiwtter feed</a><br />
-      </p>
-    </div>
-    
-    </div id="footer"></div>
-</body>
-</html>
